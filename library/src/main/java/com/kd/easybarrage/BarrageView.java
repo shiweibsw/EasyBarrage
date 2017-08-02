@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,18 +31,20 @@ public class BarrageView extends RelativeLayout {
     private int INTERVAL = 500;
 
     private Random random = new Random(System.currentTimeMillis());
-    private int maxBarrageSize = 0;
-    private int maxTextSize = 0;
-    private int minTextSize = 0;
-    private int lineHeight = 0;
-    private int borderColor = 0;
+    private int maxBarrageSize;
+    private int maxTextSize;
+    private int minTextSize;
+    private int lineHeight;
+    private int borderColor;
     private boolean random_color;
+    private boolean allow_repeat;
     private final int DEFAULT_BARRAGESIZE = 5;
     private final int DEFAULT_MAXTEXTSIZE = 20;
     private final int DEFAULT_MINTEXTSIZE = 14;
     private final int DEFAULT_LINEHEIGHT = 16;
     private final int DEFAULT_BORDERCOLOR = 0xff000000;
     private final boolean DEFAULT_RANDOMCOLOR = false;
+    private final boolean DEFAULT_ALLOWREPEAT = false;
 
     private List<Barrage> barrages = new ArrayList<>();
     private List<Barrage> cache = new ArrayList<>();
@@ -64,6 +67,7 @@ public class BarrageView extends RelativeLayout {
             lineHeight = typedArray.getDimensionPixelSize(R.styleable.BarrageView_line_height, Tools.dp2px(context, DEFAULT_LINEHEIGHT));
             borderColor = typedArray.getColor(R.styleable.BarrageView_border_color, DEFAULT_BORDERCOLOR);
             random_color = typedArray.getBoolean(R.styleable.BarrageView_random_color, DEFAULT_RANDOMCOLOR);
+            allow_repeat = typedArray.getBoolean(R.styleable.BarrageView_allow_repeat, DEFAULT_ALLOWREPEAT);
         } finally {
             typedArray.recycle();
         }
@@ -71,7 +75,15 @@ public class BarrageView extends RelativeLayout {
 
     public void setBarrages(List<Barrage> list) {
         if (!list.isEmpty()) {
+            barrages.clear();
             barrages.addAll(list);
+            mHandler.sendEmptyMessageDelayed(0, INTERVAL);
+        }
+    }
+
+    public void addBarrage(Barrage tb) {
+        barrages.add(tb);
+        if (!mHandler.hasMessages(0)) {
             mHandler.sendEmptyMessageDelayed(0, INTERVAL);
         }
     }
@@ -88,13 +100,17 @@ public class BarrageView extends RelativeLayout {
     public void checkBarrage() {
         int index = (int) (Math.random() * barrages.size());
         Barrage barrage = barrages.get(index);
-        if (cache.contains(barrage))
-            return;
-        cache.add(barrage);
+        if (allow_repeat) {
+            if (cache.contains(barrage))
+                return;
+            cache.add(barrage);
+        }
         showBarrage(barrage);
     }
 
     private void showBarrage(final Barrage tb) {
+        if (linesCount != 0 && getChildCount() >= linesCount)
+            return;
         if (getChildCount() > maxBarrageSize)
             return;
         final TextView textView = tb.isShowBorder() ? new BorderTextView(getContext(), borderColor) : new TextView(getContext());
@@ -116,7 +132,8 @@ public class BarrageView extends RelativeLayout {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                cache.remove(tb);
+                if (allow_repeat)
+                    cache.remove(tb);
                 removeView(textView);
                 int verticalMargin = (int) textView.getTag();
                 existMarginValues.remove(verticalMargin);
@@ -136,6 +153,7 @@ public class BarrageView extends RelativeLayout {
         }
         if (linesCount == 0) {
             linesCount = validHeightSpace / lineHeight;
+            Log.i("11111111", "getRandomTopMargin: " + linesCount);
             if (linesCount == 0) {
                 throw new RuntimeException("Not enough space to show text.");
             }

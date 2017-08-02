@@ -8,6 +8,7 @@
         <attr name="line_height" format="dimension"/>
         <attr name="border_color" format="color"/>
         <attr name="random_color" format="boolean"/>
+        <attr name="allow_repeat" format="boolean"/>
     </declare-styleable>
 
 </resources>
