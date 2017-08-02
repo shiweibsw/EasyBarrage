@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static com.kd.easybarrage.Tools.getScreenWidth;
+import static com.kd.easybarrage.BarrageTools.getScreenWidth;
 
 /**
  * Created by shiwei on 2017/8/2.
@@ -64,7 +63,7 @@ public class BarrageView extends RelativeLayout {
             maxBarrageSize = typedArray.getInt(R.styleable.BarrageView_size, DEFAULT_BARRAGESIZE);
             maxTextSize = typedArray.getInt(R.styleable.BarrageView_max_text_size, DEFAULT_MAXTEXTSIZE);
             minTextSize = typedArray.getInt(R.styleable.BarrageView_min_text_size, DEFAULT_MINTEXTSIZE);
-            lineHeight = typedArray.getDimensionPixelSize(R.styleable.BarrageView_line_height, Tools.dp2px(context, DEFAULT_LINEHEIGHT));
+            lineHeight = typedArray.getDimensionPixelSize(R.styleable.BarrageView_line_height, BarrageTools.dp2px(context, DEFAULT_LINEHEIGHT));
             borderColor = typedArray.getColor(R.styleable.BarrageView_border_color, DEFAULT_BORDERCOLOR);
             random_color = typedArray.getBoolean(R.styleable.BarrageView_random_color, DEFAULT_RANDOMCOLOR);
             allow_repeat = typedArray.getBoolean(R.styleable.BarrageView_allow_repeat, DEFAULT_ALLOWREPEAT);
@@ -153,7 +152,6 @@ public class BarrageView extends RelativeLayout {
         }
         if (linesCount == 0) {
             linesCount = validHeightSpace / lineHeight;
-            Log.i("11111111", "getRandomTopMargin: " + linesCount);
             if (linesCount == 0) {
                 throw new RuntimeException("Not enough space to show text.");
             }

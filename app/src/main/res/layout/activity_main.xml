@@ -15,6 +15,7 @@
         app:random_color="true"
         app:max_text_size="24"
         app:min_text_size="14"
+        app:allow_repeat="true"
         app:line_height="16dp"
         app:size="100"/>
 
