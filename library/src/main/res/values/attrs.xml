@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <declare-styleable name="BarrageView">
+        <attr name="size" format="integer"/>
+        <attr name="max_text_size" format="integer"/>
+        <attr name="min_text_size" format="integer"/>
+        <attr name="line_height" format="dimension"/>
+        <attr name="border_color" format="color"/>
+        <attr name="random_color" format="boolean"/>
+    </declare-styleable>
+
+</resources>
