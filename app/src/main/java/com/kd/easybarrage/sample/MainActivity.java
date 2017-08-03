@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         barrageView = (BarrageView) findViewById(R.id.barrageView);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 200; i++) {
             mBarrages.add(new Barrage("弹幕数据" + i));
         }
         barrageView.setBarrages(mBarrages);
@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 barrageView.addBarrage(new Barrage("我是新弹幕", true));
             }
         });
-
-
     }
 
     @Override
