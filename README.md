@@ -16,9 +16,9 @@ EasyBarrage是Android平台的一种轻量级弹幕效果目前支持以下设�
 #### 显示效果
 
 ##### 横屏
-![](https://user-gold-cdn.xitu.io/2017/8/3/771a0770d7f4b1713e78336e33b045d0)
+![](https://github.com/shiweibsw/EasyBarrage/blob/master/Screenshots/l.gif)
 ##### 竖屏
-![](https://user-gold-cdn.xitu.io/2017/8/3/3604808b39b42b146aadbdad54d7f1e9)
+![](https://github.com/shiweibsw/EasyBarrage/blob/master/Screenshots/p.gif)
 
 #### 使用
 1 build.gradle
