@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import static com.kd.easybarrage.BarrageTools.getScreenWidth;
  */
 
 public class BarrageView extends RelativeLayout {
-    private static final String TAG = "BarrageView";
     private Set<Integer> existMarginValues = new HashSet<>();
     private int linesCount;
 
@@ -38,7 +38,7 @@ public class BarrageView extends RelativeLayout {
     private int borderColor;
     private boolean random_color;
     private boolean allow_repeat;
-    private final int DEFAULT_BARRAGESIZE = 5;
+    private final int DEFAULT_BARRAGESIZE = 10;
     private final int DEFAULT_MAXTEXTSIZE = 20;
     private final int DEFAULT_MINTEXTSIZE = 14;
     private final int DEFAULT_LINEHEIGHT = 24;
@@ -85,6 +85,10 @@ public class BarrageView extends RelativeLayout {
 
     public void addBarrage(Barrage tb) {
         barrages.add(tb);
+        if (allow_repeat) {
+            cache.add(tb);
+        }
+        showBarrage(tb);
         if (!mHandler.hasMessages(0)) {
             mHandler.sendEmptyMessageDelayed(0, INTERVAL);
         }
@@ -113,7 +117,7 @@ public class BarrageView extends RelativeLayout {
     private void showBarrage(final Barrage tb) {
         if (linesCount != 0 && getChildCount() >= linesCount)
             return;
-        if (getChildCount() > maxBarrageSize)
+        if (getChildCount() >= maxBarrageSize)
             return;
         final TextView textView = tb.isShowBorder() ? new BorderTextView(getContext(), borderColor) : new TextView(getContext());
         textView.setTextSize((int) (minTextSize + (maxTextSize - minTextSize) * Math.random()));
@@ -135,6 +139,7 @@ public class BarrageView extends RelativeLayout {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                Log.i("111111", "onAnimationEnd: ");
                 if (allow_repeat)
                     cache.remove(tb);
                 removeView(textView);

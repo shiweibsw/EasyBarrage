@@ -5,18 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.kd.easybarrage.sample.MainActivity">
 
     <com.kd.easybarrage.BarrageView
         android:id="@+id/barrageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:border_color="@color/colorAccent"
-        app:random_color="true"
-        app:max_text_size="18"
-        app:min_text_size="14"
         app:allow_repeat="true"
+        app:border_color="@color/colorAccent"
         app:line_height="24dp"
-        app:size="100"/>
+        app:max_text_size="20"
+        app:min_text_size="14"
+        app:random_color="true"
+        app:size="20"/>
 
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="添加一条弹幕"/>
 </LinearLayout>
