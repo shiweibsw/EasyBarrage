@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 barrageView.addBarrage(new Barrage("我是新弹幕", true));
             }
         });
+
+        Barrage b=new Barrage("弹幕数据");
     }
 
     @Override
