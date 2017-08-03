@@ -23,6 +23,7 @@ import static com.kd.easybarrage.BarrageTools.getScreenWidth;
  */
 
 public class BarrageView extends RelativeLayout {
+    private static final String TAG = "BarrageView";
     private Set<Integer> existMarginValues = new HashSet<>();
     private int linesCount;
 
@@ -40,7 +41,7 @@ public class BarrageView extends RelativeLayout {
     private final int DEFAULT_BARRAGESIZE = 5;
     private final int DEFAULT_MAXTEXTSIZE = 20;
     private final int DEFAULT_MINTEXTSIZE = 14;
-    private final int DEFAULT_LINEHEIGHT = 16;
+    private final int DEFAULT_LINEHEIGHT = 24;
     private final int DEFAULT_BORDERCOLOR = 0xff000000;
     private final boolean DEFAULT_RANDOMCOLOR = false;
     private final boolean DEFAULT_ALLOWREPEAT = false;
@@ -67,6 +68,8 @@ public class BarrageView extends RelativeLayout {
             borderColor = typedArray.getColor(R.styleable.BarrageView_border_color, DEFAULT_BORDERCOLOR);
             random_color = typedArray.getBoolean(R.styleable.BarrageView_random_color, DEFAULT_RANDOMCOLOR);
             allow_repeat = typedArray.getBoolean(R.styleable.BarrageView_allow_repeat, DEFAULT_ALLOWREPEAT);
+            if (BarrageTools.px2sp(context, lineHeight) < maxTextSize)
+                maxTextSize =BarrageTools.px2sp(context, lineHeight) ;
         } finally {
             typedArray.recycle();
         }
@@ -116,6 +119,7 @@ public class BarrageView extends RelativeLayout {
         textView.setTextSize((int) (minTextSize + (maxTextSize - minTextSize) * Math.random()));
         textView.setText(tb.getContent());
         textView.setTextColor(random_color ? Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)) : getResources().getColor(tb.getColor()));
+
         int leftMargin = getRight() - getLeft() - getPaddingLeft();
         int verticalMargin = getRandomTopMargin();
         textView.setTag(verticalMargin);

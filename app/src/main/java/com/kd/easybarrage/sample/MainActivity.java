@@ -19,36 +19,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         barrageView = (BarrageView) findViewById(R.id.barrageView);
 
-        mBarrages.add(new Barrage("士大夫精神放松", true));
-        mBarrages.add(new Barrage("dffdfdf"));
-        mBarrages.add(new Barrage("231231231"));
-        mBarrages.add(new Barrage("fdsf"));
-        mBarrages.add(new Barrage("说的发生的发发发放松的方式地方", R.color.colorPrimary));
-        mBarrages.add(new Barrage("三十岁四十岁时", R.color.colorPrimary, true));
-        mBarrages.add(new Barrage("嘎嘎嘎嘎嘎嘎嘎嘎嘎"));
-        mBarrages.add(new Barrage("434235354"));
-        mBarrages.add(new Barrage("点324324", R.color.colorPrimary));
-        mBarrages.add(new Barrage("更多更深的地方都是"));
-        mBarrages.add(new Barrage("士大夫精神放松", true));
-        mBarrages.add(new Barrage("dffdfdf"));
-        mBarrages.add(new Barrage("231231231"));
-        mBarrages.add(new Barrage("fdsf"));
-        mBarrages.add(new Barrage("说的发生的发发发放松的方式地方"));
-        mBarrages.add(new Barrage("三十岁四十岁时", true));
-        mBarrages.add(new Barrage("嘎嘎嘎嘎嘎嘎嘎嘎嘎"));
-        mBarrages.add(new Barrage("434235354"));
-        mBarrages.add(new Barrage("点324324"));
-        mBarrages.add(new Barrage("更多更深的地方都是"));
-        mBarrages.add(new Barrage("士大夫精神放松", true));
-        mBarrages.add(new Barrage("dffdfdf"));
-        mBarrages.add(new Barrage("231231231", R.color.colorPrimary));
-        mBarrages.add(new Barrage("fdsf"));
-        mBarrages.add(new Barrage("说的发生的发发发放松的方式地方", R.color.colorPrimary));
-        mBarrages.add(new Barrage("三十岁四十岁时", true));
-        mBarrages.add(new Barrage("嘎嘎嘎嘎嘎嘎嘎嘎嘎"));
-        mBarrages.add(new Barrage("434235354"));
-        mBarrages.add(new Barrage("点324324"));
-        mBarrages.add(new Barrage("更多更深的地方都是"));
+        mBarrages.add(new Barrage("弹幕数据01带边框", true));
+        mBarrages.add(new Barrage("弹幕数据02"));
+        mBarrages.add(new Barrage("弹幕数据03"));
+        mBarrages.add(new Barrage("弹幕数据04"));
+        mBarrages.add(new Barrage("弹幕数据05", R.color.colorPrimary));
+        mBarrages.add(new Barrage("弹幕数据06", R.color.colorPrimary, true));
+        mBarrages.add(new Barrage("弹幕数据07"));
+        mBarrages.add(new Barrage("弹幕数据08"));
+        mBarrages.add(new Barrage("弹幕数据09", R.color.colorPrimary));
+        mBarrages.add(new Barrage("弹幕数据10"));
+        mBarrages.add(new Barrage("超长弹幕测试数据超长弹幕测试数据超长弹幕测试数据", true));
+        mBarrages.add(new Barrage("弹幕数据11"));
+        mBarrages.add(new Barrage("弹幕数据12"));
+        mBarrages.add(new Barrage("弹幕数据13"));
+        mBarrages.add(new Barrage("弹幕数据14"));
+        mBarrages.add(new Barrage("弹幕数据15", true));
+
         barrageView.setBarrages(mBarrages);
     }
 

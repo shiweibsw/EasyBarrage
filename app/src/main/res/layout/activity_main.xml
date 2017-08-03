@@ -13,10 +13,10 @@
         android:layout_height="200dp"
         app:border_color="@color/colorAccent"
         app:random_color="true"
-        app:max_text_size="24"
+        app:max_text_size="18"
         app:min_text_size="14"
         app:allow_repeat="true"
-        app:line_height="16dp"
+        app:line_height="24dp"
         app:size="100"/>
 
 </LinearLayout>
