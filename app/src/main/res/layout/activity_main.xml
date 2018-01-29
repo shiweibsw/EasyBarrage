@@ -26,7 +26,9 @@
         app:line_height="20dp"
         app:max_text_size="20"
         app:min_text_size="14"
-        app:random_color="true"
+        app:random_color="false"
+        app:text_left_padding="90"
+        app:text_right_padding="90"
         app:size="200"/>
 
 

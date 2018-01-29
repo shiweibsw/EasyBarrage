@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyBarrage.iml" filepath="$PROJECT_DIR$/EasyBarrage.iml" />
+      <module fileurl="file://E:\WorkPlace\CodeHub\EasyBarrage\EasyBarrage.iml" filepath="E:\WorkPlace\CodeHub\EasyBarrage\EasyBarrage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\WorkPlace\CodeHub\EasyBarrage\app\app.iml" filepath="E:\WorkPlace\CodeHub\EasyBarrage\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://E:\WorkPlace\CodeHub\EasyBarrage\library\library.iml" filepath="E:\WorkPlace\CodeHub\EasyBarrage\library\library.iml" />
     </modules>
   </component>
 </project>
