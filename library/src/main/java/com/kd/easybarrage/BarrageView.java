@@ -134,7 +134,7 @@ public class BarrageView extends RelativeLayout {
         final TextView textView = tb.isShowBorder() ? new BorderTextView(getContext(), borderColor) : new TextView(getContext());
         Drawable drawable = textView.getContext().getResources().getDrawable(R.drawable.shape_bg_round);
         textView.setBackgroundDrawable(tintDrawable(drawable, tb.getBackGroundColor()));
-        textView.setPadding(textLeftPadding, 10, textRightPadding, 10);
+        textView.setPadding(textLeftPadding, textTopPadding, textRightPadding, textBottomPadding);
 
         textView.setTextSize((int) (minTextSize + (maxTextSize - minTextSize) * Math.random()));
         textView.setText(tb.getContent());
