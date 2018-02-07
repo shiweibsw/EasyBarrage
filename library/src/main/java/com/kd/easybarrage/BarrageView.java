@@ -1,10 +1,13 @@
 package com.kd.easybarrage;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.animation.Animation;
@@ -32,12 +35,17 @@ public class BarrageView extends RelativeLayout {
 
     private Random random = new Random(System.currentTimeMillis());
     private int maxBarrageSize;
+    private int textLeftPadding;
+    private int textRightPadding;
+    private int textTopPadding;
+    private int textBottomPadding;
     private int maxTextSize;
     private int minTextSize;
     private int lineHeight;
     private int borderColor;
     private boolean random_color;
     private boolean allow_repeat;
+    private final int DEFAULT_PADDING = 15;
     private final int DEFAULT_BARRAGESIZE = 10;
     private final int DEFAULT_MAXTEXTSIZE = 20;
     private final int DEFAULT_MINTEXTSIZE = 14;
@@ -61,6 +69,10 @@ public class BarrageView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BarrageView, 0, 0);
         try {
+            textLeftPadding = typedArray.getInt(R.styleable.BarrageView_text_left_padding, DEFAULT_PADDING);
+            textRightPadding = typedArray.getInt(R.styleable.BarrageView_text_right_padding, DEFAULT_PADDING);
+            textTopPadding = typedArray.getInt(R.styleable.BarrageView_text_top_padding, DEFAULT_PADDING);
+            textBottomPadding = typedArray.getInt(R.styleable.BarrageView_text_bottom_padding, DEFAULT_PADDING);
             maxBarrageSize = typedArray.getInt(R.styleable.BarrageView_size, DEFAULT_BARRAGESIZE);
             maxTextSize = typedArray.getInt(R.styleable.BarrageView_max_text_size, DEFAULT_MAXTEXTSIZE);
             minTextSize = typedArray.getInt(R.styleable.BarrageView_min_text_size, DEFAULT_MINTEXTSIZE);
@@ -69,7 +81,7 @@ public class BarrageView extends RelativeLayout {
             random_color = typedArray.getBoolean(R.styleable.BarrageView_random_color, DEFAULT_RANDOMCOLOR);
             allow_repeat = typedArray.getBoolean(R.styleable.BarrageView_allow_repeat, DEFAULT_ALLOWREPEAT);
             if (BarrageTools.px2sp(context, lineHeight) < maxTextSize)
-                maxTextSize =BarrageTools.px2sp(context, lineHeight) ;
+                maxTextSize = BarrageTools.px2sp(context, lineHeight);
         } finally {
             typedArray.recycle();
         }
@@ -120,6 +132,10 @@ public class BarrageView extends RelativeLayout {
         if (getChildCount() >= maxBarrageSize)
             return;
         final TextView textView = tb.isShowBorder() ? new BorderTextView(getContext(), borderColor) : new TextView(getContext());
+        Drawable drawable = textView.getContext().getResources().getDrawable(R.drawable.shape_bg_round);
+        textView.setBackgroundDrawable(tintDrawable(drawable, tb.getBackGroundColor()));
+        textView.setPadding(textLeftPadding, textTopPadding, textRightPadding, textBottomPadding);
+
         textView.setTextSize((int) (minTextSize + (maxTextSize - minTextSize) * Math.random()));
         textView.setText(tb.getContent());
         textView.setTextColor(random_color ? Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)) : getResources().getColor(tb.getColor()));
@@ -127,7 +143,8 @@ public class BarrageView extends RelativeLayout {
         int leftMargin = getRight() - getLeft() - getPaddingLeft();
         int verticalMargin = getRandomTopMargin();
         textView.setTag(verticalMargin);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams
+                .WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.topMargin = verticalMargin;
         textView.setLayoutParams(params);
@@ -180,6 +197,13 @@ public class BarrageView extends RelativeLayout {
             mHandler.removeMessages(0);
         barrages.clear();
         cache.clear();
+    }
+
+    private Drawable tintDrawable(Drawable drawable, int color) {
+        ColorStateList colors = ColorStateList.valueOf(color);
+        Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
     }
 
 }
